@@ -30,10 +30,9 @@ class Simulator:
                 past = stock.get_past(step)
                 action = agent.run(past)
                 current_state = copy(state_history[-1])
-                new_state = current_state.apply(action, past[-1])
+                new_state = current_state.apply_action(action, past[-1])
                 state_history.append(new_state)
         except:
             print("Agent failed to survive!")
 
         return state_history
-        

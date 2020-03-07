@@ -1,4 +1,3 @@
-import math
 from Action import Action
 
 
@@ -15,7 +14,7 @@ class State:
             raise Exception("Unable to add negative funds!")
         return self._funds
 
-    def apply(self, action: Action, price: float):
+    def apply_action(self, action: Action, price: float):
         self._price = price
         self._close()
         if action is Action.LONG:
@@ -36,20 +35,3 @@ class State:
     def _short(self):
         self._position = -int(self._funds // self._price)
         self._funds -= self._position * self._price
-
-
-if __name__ == "__main__":
-    state = State(100.0)
-
-    state.apply(Action.SHORT, 20)
-    state.apply(Action.LONG, 10)
-    state.apply(Action.OUT, 20)
-
-    state.apply(Action.LONG, 30.0)
-    state.add_funds(20.0)
-    state.apply(Action.LONG, 30.0)
-    state.add_funds(10.0)
-    state.apply(Action.LONG, 9.0)
-
-    state.apply(Action.OUT, 10.0)
-    state.apply(Action.SHORT, 20)
