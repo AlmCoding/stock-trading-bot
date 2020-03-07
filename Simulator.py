@@ -1,12 +1,12 @@
 from copy import copy
 
-from Agent import Agent
+from agents.Agent import Agent
 from Stock import Stock
-from State import State
+from Portfolio import Portfolio
 
 
 class Simulator:
-    def __init__(self, agent: Agent, stocks: list, state: State):
+    def __init__(self, agent: Agent, stocks: list, state: Portfolio):
         self._agent = agent
         self._stocks = stocks
         self._state = state
@@ -14,7 +14,7 @@ class Simulator:
         self._state_history = []
         self._state_histories = []
  
-    def simulate(self, iterations=100):
+    def run(self, iterations=100):
         for stock in self._stocks:
             state_histories = []
             for _ in range(iterations):

@@ -1,7 +1,7 @@
 from Action import Action
 
 
-class State:
+class Portfolio:
     def __init__(self, funds):
         self._funds = funds
         self._position = 0

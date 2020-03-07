@@ -48,5 +48,3 @@ if __name__ == "__main__":
     dow = ["MMM", "AXP", "AAPL", "BA", "CAT", "CVX", "CSCO", "KO", "DIS", "DOW", "XOM", "GS", "HD", "IBM", "INTC",
            "JNJ", "JPM", "MCD", "MRK", "MSFT", "NKE", "PFE", "PG", "TRV", "UTX", "UNH", "VZ", "V", "WBA", "WMT", "GOOG"]
     # download_stock_data("Dow", dow, count=3650)
-
-    load_stock_data("Dow")
