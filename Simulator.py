@@ -6,33 +6,32 @@ from Portfolio import Portfolio
 
 
 class Simulator:
-    def __init__(self, agent: Agent, stocks: list, state: Portfolio):
+    def __init__(self, agent: Agent, stocks: list, portfolio: Portfolio, min_past_steps=300, min_eval_steps=300):
         self._agent = agent
         self._stocks = stocks
-        self._state = state
+        self._portfolio = portfolio
+        self._min_past_steps = min_past_steps
+        self._min_eval_steps = min_eval_steps
 
-        self._state_history = []
-        self._state_histories = []
- 
     def run(self, iterations=100):
         for stock in self._stocks:
-            state_histories = []
+            portfolio_histories = []
             for _ in range(iterations):
-                state_history = self.apply(self._agent, stock)
-                state_histories.append(state_history)
-            stock.state_histories = state_histories
-    
+                portfolio_history = self.apply(self._agent, stock)
+                portfolio_histories.append(portfolio_history)
+            # stock.portfolio_histories = portfolio_histories
+
     def apply(self, agent: Agent, stock: Stock):
-        state_history = [copy(self._state)]
-        steps = stock.random_split()
+        portfolio_history = [copy(self._portfolio)]
+        evaluation_steps = stock.random_split(self._min_past_steps, self._min_eval_steps)
         try:
-            for step in range(steps): 
+            for step in range(evaluation_steps):
                 past = stock.get_past(step)
-                action = agent.run(past)
-                current_state = copy(state_history[-1])
-                new_state = current_state.apply_action(action, past[-1])
-                state_history.append(new_state)
+                #action = agent.run(past)
+                #current_state = copy(portfolio_history[-1])
+                #new_portfolio = current_state.apply_action(action, past[-1])
+                #portfolio_history.append(new_portfolio)
         except:
             print("Agent failed to survive!")
 
-        return state_history
+        return portfolio_history

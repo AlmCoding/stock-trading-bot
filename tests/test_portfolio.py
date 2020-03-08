@@ -52,6 +52,9 @@ def test_portfolio_mix():
     assert funds == 120.0
     assert position == -6
 
-    funds, position = portfolio.apply_action(Action.LONG, 20.0)
-    assert funds == 0.0
-    assert position == 0
+    failed = False
+    try:
+        portfolio.apply_action(Action.LONG, 20.0)
+    except:
+        failed = True
+    assert failed
