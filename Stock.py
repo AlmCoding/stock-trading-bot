@@ -1,6 +1,6 @@
 from Record import Record
 import random
-
+ 
 
 class Stock:
     def __init__(self, symbol):

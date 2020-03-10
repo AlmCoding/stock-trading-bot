@@ -6,14 +6,17 @@ class Portfolio:
         self._funds = funds
         self._position = 0
         self._price = .0
+        self._timestamp = None
 
     def add_funds(self, funds: float) -> float:
         assert funds >= .0
         self._funds += funds
         return self._funds
 
-    def apply_action(self, action: Action, price: float) -> tuple:
+    def apply_action(self, action: Action, price: float, timestamp: int) -> tuple:
+        self._timestamp = timestamp
         self._price = price
+
         self._close()
         if action is Action.LONG:
             self._long()

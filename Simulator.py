@@ -13,7 +13,7 @@ class Simulator:
         self._min_past_steps = min_past_steps
         self._min_eval_steps = min_eval_steps
 
-    def run(self, iterations=100):
+    def run(self, iterations=10):
         for stock in self._stocks:
             portfolio_histories = []
             for _ in range(iterations):
@@ -27,9 +27,10 @@ class Simulator:
         try:
             for step in range(evaluation_steps):
                 past = stock.get_past(step)
+                print(past[-1].close)
                 #action = agent.run(past)
                 #current_state = copy(portfolio_history[-1])
-                #new_portfolio = current_state.apply_action(action, past[-1])
+                #new_portfolio = current_state.apply_action(action, past[-1].close)
                 #portfolio_history.append(new_portfolio)
         except:
             print("Agent failed to survive!")

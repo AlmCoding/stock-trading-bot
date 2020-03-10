@@ -8,6 +8,14 @@ class TestAgent(Agent):
         pass
 
     def run(self, past):
-        a = past
-        h = 12
-        pass
+        return self.follow_day_trend(past)
+
+    @staticmethod
+    def follow_day_trend(past):
+        record = past[-1]
+        diff = record.close - record.open
+
+        if diff > 0:
+            return Action.LONG
+        else:
+            return Action.SHORT
